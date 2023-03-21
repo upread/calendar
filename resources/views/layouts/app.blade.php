@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <base href="{{env('APP_URL')}}" />
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/style.css?ver=1">
     </head>
     <body>
         <div class="">
