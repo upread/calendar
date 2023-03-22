@@ -7,11 +7,11 @@
         <meta name="description" content="">
         <base href="{{env('APP_URL')}}" />
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="stylesheet" href="/style.css?ver=1">
+        <link rel="stylesheet" href="/css/style.css?ver=2">
     </head>
     <body>
-        <div class="">
-            @include('layouts.navigation')
+        <div class="wrapper">
+            @include('components.header')
             <main>
                 {{ $slot }}
             </main>

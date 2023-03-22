@@ -1,1 +1,51 @@
+@font-face {
+    font-family: 'Finlandica';
+    src: url('fonts/Finlandica-Regular.ttf');
+}
+body{
+    margin: 0;
+    font-family: 'Finlandica';
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.wrapper{
+    margin: 10px auto;
+    max-width: 1500px;
+}
+#header{
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #00cd00;
+}
+#wrap_head_mnu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+.sin_head_mnu{
+    margin-right: 20px;
+}
+#wrap_logo{
+    margin-left: auto;
+}
+.logo{
+    max-width: 100px
+}
+.unic_button{
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+.unic_green_button{
+    background: #00cd00;
+    color: white;
+    border: 1px solid #00a400;
+}
+
+
+
 
