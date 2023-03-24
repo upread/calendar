@@ -1,6 +1,6 @@
 <x-app-layout>
 <div class="wrap_task_form">
-    <button id="add_task" class="unic_button unic_green_button">Добавить новую задачу</button>
+    <button id="show_add_task_modal" class="unic_button unic_green_button">Добавить новую задачу</button>
 </div>
 <br>
 <h2>Список задач</h2>

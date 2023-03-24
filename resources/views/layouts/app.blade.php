@@ -7,7 +7,11 @@
         <meta name="description" content="">
         <base href="{{env('APP_URL')}}" />
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link href='/css/sweetalert2.min.css'>
         <link rel="stylesheet" href="/css/style.css?ver=2">
+        <script src="/js/jquery-3.6.0.min.js"></script>
+        <script src="/js/sweetalert2.all.min.js"></script>
+        <script src="/js/main.js?ver=1"></script>
     </head>
     <body>
         <div class="wrapper">

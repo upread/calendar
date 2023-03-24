@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth'])->name('dashboard');
-
+Route::post('/ajax', [BetController::class, 'showAjax']);
+Route::get('/ajax', [BetController::class, 'showAjax']);
 
 require __DIR__.'/auth.php';
