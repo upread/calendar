@@ -20,7 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middleware(['auth'])->name('dashboard');
-Route::post('/ajax', [BetController::class, 'showAjax']);
-Route::get('/ajax', [BetController::class, 'showAjax']);
+Route::post('/ajax', [BetController::class, 'showAjax'])->middleware(['auth']);
 
 require __DIR__.'/auth.php';

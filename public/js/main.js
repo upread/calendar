@@ -1,12 +1,21 @@
 $(function() {
+
+    function add_task(task_id, task_name){
+        let div = `<div class="wrap_task" data-id="${task_id}">`;
+        div += `<div class="task_name td">${task_name}</div>`;
+        div += `<div class="td">Разовая</div>`;
+        div += `</div>`;
+        $(".wrap_tasks_list .thead").after(div);
+    }
+
     $( "#show_add_task_modal" ).click(function() {
         Swal.fire({
             title: 'Добавление новой задачи',
             html:
             'Название: <input type="text" id="task_name" placeholder="Название"><br>' +
             'Тип: <select id="task_type">' +
-            '<option value="1" selected>Одноразовая</option>' +
-            '<option value="2" selected>Периодическая</option>' +
+            '<option value="1" selected>Разовая</option>' +
+            '<option value="2" selected>Повторяемая</option>' +
             '</select><br>'+
             'Время выполнения: <input type="datetime-local">'
             ,
@@ -37,8 +46,11 @@ $(function() {
                     return response.json();
                   })
                   .then(data=>{
-                    if (data["success"] != true){
+                    if (!data["success"]){
                         throw new Error("Ошибка")
+                    }
+                    else{
+                        add_task(data["task_id"], data["name"]);
                     }
                   })
                   .catch(error => {
@@ -54,7 +66,8 @@ $(function() {
                             'Успешно',
                             'Задача успешно добавлена',
                             'success'
-                          )
+                        );
+
                     }
 
                 });

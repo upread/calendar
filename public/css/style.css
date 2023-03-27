@@ -45,7 +45,22 @@ a{
     color: white;
     border: 1px solid #00a400;
 }
-
-
+.wrap_tasks_list{
+    margin: auto;
+    width: 90%;
+}
+.td{
+    width: 150px;
+}
+.thead{
+    font-weight: 600;
+}
+.thead, .wrap_task{
+    display: flex;
+    padding: 10px;
+}
+.wrap_tasks_list .wrap_task:nth-child(2n){
+    background: rgb(206, 252, 216);
+}
 
 

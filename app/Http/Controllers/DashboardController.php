@@ -16,6 +16,7 @@ class DashboardController extends Controller
     function getUserTasks($user_id){
         return DB::table('tasks')
         ->where('user_id', $user_id)
+        ->orderBy('id', 'DESC')
         ->get();
     }
 

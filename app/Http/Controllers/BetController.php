@@ -15,11 +15,23 @@ class BetController extends Controller
 
     public function showAjax(Request $request)
     {
+        $uid = Auth::user()->id;
 
         if ($request->reque == "add_task"){
+            $name = $request->name;
+            if (!$name){
+                $name = date("d-m-Y");
+            }
 
-            if ($request->name == "ff"){
+            $task_id = DB::table('tasks')->insertGetId([
+                'user_id' => $uid,
+                'name' => $name
+            ]);
+
+            if ($task_id){
                 $resp["success"] = true;
+                $resp["task_id"] = $task_id;
+                $resp["name"] = $name;
             }
             else{
                 $resp["success"] = false;

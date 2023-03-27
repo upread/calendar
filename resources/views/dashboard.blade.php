@@ -6,9 +6,14 @@
 <h2>Список задач</h2>
 <br>
 <div class="wrap_tasks_list">
+    <div class="thead">
+        <div class="td">Название</div>
+        <div class="td">Тип</div>
+    </div>
     @foreach ($tasks as $task)
-    <div class="wrap_task">
-        <div class="task_name">{{$task->name}}</div>
+    <div class="wrap_task" data-id="{{$task->id}}">
+        <div class="task_name td">{{$task->name}}</div>
+        <div class="td">{{$task->type}}</div>
     </div>
     @endforeach
 </div>
