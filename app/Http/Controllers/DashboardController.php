@@ -33,13 +33,6 @@ class DashboardController extends Controller
 		Mail::to($toEmail)->send(new SendMail($message));
         */
 
-
-        /*
-        $tg = new Telegram();
-        $tg->sendMessage("506570374", "привет");
-        */
-
-
         return view('dashboard', ["tasks" => $tasks]);
     }
 }

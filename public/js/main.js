@@ -15,9 +15,9 @@ $(function() {
             'Название: <input type="text" id="task_name" placeholder="Название"><br>' +
             'Тип: <select id="task_type">' +
             '<option value="1" selected>Разовая</option>' +
-            '<option value="2" selected>Повторяемая</option>' +
+            '<option value="2">Повторяемая</option>' +
             '</select><br>'+
-            'Время выполнения: <input type="datetime-local">'
+            'Время выполнения: <input type="datetime-local" id="task_date_send">'
             ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -36,7 +36,8 @@ $(function() {
                       },
                     body: JSON.stringify({
                         'reque': 'add_task',
-                        'name':  $('#task_name').val()
+                        'name':  $('#task_name').val(),
+                        'date_send':  $('#task_date_send').val()
                     }),
                 })
                   .then(response => {

@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="/css/style.css?ver=3">
         <script src="/js/jquery-3.6.0.min.js"></script>
         <script src="/js/sweetalert2.all.min.js"></script>
-        <script src="/js/main.js?ver=2"></script>
+        <script src="/js/main.js?ver=3"></script>
     </head>
     <body>
         <div class="wrapper">

@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use App\Telegram\Telegram;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,14 +27,30 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        /*
+
         $schedule->call(function () {
-            DB::table('tasks')->insert([
-                'user_id' => '1',
-                'name' => 'крон'
-            ]);
-        })->everyMinute();
-        */
+            $sdvig = "";
+            if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+                $sdvig = " + interval '3' HOUR";
+            }
+
+            $tasks_ring = DB::table('tasks')
+            ->where('is_send', '0')
+            ->where('date_send', '<', DB::raw("current_timestamp()".$sdvig))
+            ->get();
+
+            $tg = new Telegram();
+
+            foreach ($tasks_ring as $task){
+                $tg->sendMessage("506570374", $task->name);
+
+                DB::table('tasks')
+                ->where('id', $task->id)
+                ->update([
+                    'is_send' => '1'
+                ]);
+            }
+            })->everyMinute();
     }
 
     /**
