@@ -42,5 +42,14 @@ class BetController extends Controller
 
             return json_encode($resp);
         }
+
+        if ($request->reque == "del_task"){
+            $resp["success"] = true;
+            DB::table('tasks')
+            ->where('id', $request->task_id)
+            ->where('user_id', $uid)
+            ->delete();
+            return json_encode($resp);
+        }
     }
 }

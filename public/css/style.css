@@ -62,5 +62,13 @@ a{
 .wrap_tasks_list .wrap_task:nth-child(2n){
     background: rgb(206, 252, 216);
 }
-
+.button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.del_task{
+    color: red;
+}
 
