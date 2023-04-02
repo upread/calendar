@@ -142,5 +142,12 @@ $(function() {
                 });
     });
 
+    setTimeout(() => {
+        $("#preloader").css('display', 'none');
+    }, 10000);
 
+});
+
+$(window).on('load', function () {
+    $("#preloader").css('display', 'none');
 });
