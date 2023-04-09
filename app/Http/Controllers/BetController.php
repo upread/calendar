@@ -19,7 +19,10 @@ class BetController extends Controller
 
         if ($request->reque == "add_task"){
             $name = $request->name;
+            $type = $request->task_type;
             $date_send = date('Y-m-d H:i:s', strtotime($request->date_send));
+            $days_send = $request->days_send;
+            $time_send = $request->time_send;
 
             if (!$name){
                 $name = date("d-m-Y");
@@ -28,7 +31,10 @@ class BetController extends Controller
             $task_id = DB::table('tasks')->insertGetId([
                 'user_id' => $uid,
                 'name' => $name,
-                'date_send' => $date_send
+                'type' => $type,
+                'days_send' => $days_send,
+                'date_send' => $date_send,
+                'time_send' => $time_send
             ]);
 
             if ($task_id){

@@ -20,12 +20,23 @@ $(function() {
         Swal.fire({
             title: 'Добавление новой задачи',
             html:
-            'Название: <input type="text" id="task_name" placeholder="Название"><br>' +
-            'Тип: <select id="task_type">' +
+            '<div class="modal_row"><label for="task_name">Название:</label><input type="text" id="task_name" placeholder="Название"></div>' +
+            '<div class="modal_row"><label for="task_type">Тип:</label><select id="task_type">' +
             '<option value="1" selected>Разовая</option>' +
             '<option value="2">Повторяемая</option>' +
-            '</select><br>'+
-            'Время выполнения: <input type="datetime-local" id="task_date_send">'
+            '</select></div>'+
+            '<div class="modal_row" id="time_one"><label for="task_date_send">Время выполнения:</label><input type="datetime-local" id="task_date_send"></div>'+
+            '<div class="modal_row" id="time_repeat"><div><label for="task_days_send">Дни выполнения:</label><select id="task_days_send">'+
+            '<option value="1" selected>Понедельник</option>' +
+            '<option value="2">Вторник</option>' +
+            '<option value="3">Среда</option>' +
+            '<option value="4">Четверг</option>' +
+            '<option value="5">Пятница</option>' +
+            '<option value="6">Суббота</option>' +
+            '<option value="7">Воскресенье</option>' +
+            '</select>'+
+            '</div>'+
+            '<div><label for="task_time_send">Время выполнения:</label><input type="time" id="task_time_send"></div></div>'
             ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -45,7 +56,10 @@ $(function() {
                     body: JSON.stringify({
                         'reque': 'add_task',
                         'name':  $('#task_name').val(),
-                        'date_send':  $('#task_date_send').val()
+                        'date_send':  $('#task_date_send').val(),
+                        'task_type':  $('#task_type').val(),
+                        'days_send':  $('#task_days_send').val(),
+                        'time_send':  $('#task_time_send').val()
                     }),
                 })
                   .then(response => {
@@ -140,6 +154,18 @@ $(function() {
                     }
 
                 });
+    });
+
+    $("body").on('change', '#task_type', function(e){
+        let task_type = $(this).val();
+        if (task_type == 1){
+            $("#time_repeat").css("display", "none");
+            $("#time_one").css("display", "flex");
+        }
+        else{
+            $("#time_one").css("display", "none");
+            $("#time_repeat").css("display", "flex");
+        }
     });
 
     setTimeout(() => {

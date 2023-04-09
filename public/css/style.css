@@ -111,3 +111,12 @@ a{
       transform: rotate(1800deg);
     }
   }
+.modal_row{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+    border-bottom: 1px solid lavender;
+}
+#time_repeat{
+    display: none;
+}
