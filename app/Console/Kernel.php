@@ -34,23 +34,39 @@ class Kernel extends ConsoleKernel
                 $sdvig = " + interval '3' HOUR";
             }
 
-            $tasks_ring = DB::table('tasks')
+            //одноразовые задачи
+            $tasks_one = DB::table('tasks')
+            ->where('type', '1')
             ->where('is_send', '0')
             ->where('date_send', '<', DB::raw("current_timestamp()".$sdvig))
             ->get();
 
+
+            //повторяемые
+            $today = date("N");
+            $tim = date("H:i", strtotime('+3 hours')).":00";
+
+            echo "---".$tim."----";
+
+            $tasks_repeat = DB::table('tasks')
+            ->where('type', '2')
+            ->where('days_send', 'like', '%'. $today .'%')
+            ->where('time_send', $tim)
+            ->get();
+
+
+            $tasks = $tasks_one->merge($tasks_repeat);
+
             $tg = new Telegram();
-
-            foreach ($tasks_ring as $task){
+            foreach ($tasks as $task){
                 $tg->sendMessage("506570374", $task->name);
-
                 DB::table('tasks')
                 ->where('id', $task->id)
                 ->update([
                     'is_send' => '1'
                 ]);
             }
-            })->everyMinute();
+        })->everyMinute();
     }
 
     /**
