@@ -1,9 +1,10 @@
 $(function() {
 
-    function add_task(task_id, task_name){
+    function add_task(task_id, task_name, task_type){
         let div = `<div class="wrap_task" id="wrap_task${task_id}">`;
         div += `<div class="task_name td">${task_name}</div>`;
-        div += `<div class="td">1</div>`;
+        div += `<div class="td">${task_type}</div>`;
+        div += `<div class="td"></div>`;
         div += `<div class="td">
         <button class="button del_task" data-id="${task_id}">
         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -73,7 +74,7 @@ $(function() {
                         throw new Error("Ошибка")
                     }
                     else{
-                        add_task(data["task_id"], data["name"]);
+                        add_task(data["task_id"], data["name"], $('#task_type option:selected').text());
                     }
                   })
                   .catch(error => {

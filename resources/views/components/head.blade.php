@@ -5,4 +5,4 @@
 <link rel="stylesheet" href="/css/style.css?ver=6">
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/sweetalert2.all.min.js"></script>
-<script src="/js/main.js?ver=6"></script>
+<script src="/js/main.js?ver=7"></script>

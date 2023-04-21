@@ -7,14 +7,22 @@
 <br>
 <div class="wrap_tasks_list">
     <div class="thead">
-        <div class="td">Название</div>
+        <div class="td">{{__('Name_task')}}</div>
         <div class="td">Тип</div>
+        <div class="td">Время (Дни недели)</div>
         <div class="td">Действие</div>
     </div>
     @foreach ($tasks as $task)
     <div class="wrap_task" id="wrap_task{{$task->id}}">
         <div class="task_name td">{{$task->name}}</div>
-        <div class="td">{{$task->type}}</div>
+        <div class="td">@if ($task->type == 1)
+            Разовая
+        @else
+            Повторяемая
+        @endif</div>
+        <div class="td">
+
+        </div>
         <div class="td">
             <button class="button del_task" data-id="{{$task->id}}">
                 <i class="fa fa-trash" aria-hidden="true"></i>
