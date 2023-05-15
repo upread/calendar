@@ -17,9 +17,25 @@ $(function() {
         $("#wrap_task"+task_id).remove();
     }
 
+    /*
+    var html_mod = "";
+    function get_modal_raw(){
+      $.post("/ajax", {
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        reque: "get_modal_html"
+    }).done(function(data) {
+        var obj = JSON.parse(data);
+        if (obj["success"]){
+          html_mod = obj["mess"];
+        }
+    });
+    }
+    */
+
+
     $( "#show_add_task_modal" ).click(function() {
         Swal.fire({
-            title: 'Добавление новой задачи',
+            title: "Добавить новую задачу",
             html:
             '<div class="modal_row"><label for="task_name">Название:</label><input type="text" id="task_name" placeholder="Название"></div>' +
             '<div class="modal_row"><label for="task_type">Тип:</label><select id="task_type">' +

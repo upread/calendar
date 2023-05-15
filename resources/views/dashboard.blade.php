@@ -13,18 +13,21 @@
         <div class="td">Действие</div>
     </div>
     @foreach ($tasks as $task)
-    <div class="wrap_task" id="wrap_task{{$task->id}}">
-        <div class="task_name td">{{$task->name}}</div>
-        <div class="td">@if ($task->type == 1)
+    <div class="wrap_task" id="wrap_task{{$task['id']}}">
+        <div class="task_name td">{{$task['name']}}</div>
+        <div class="td">
+        @if ($task['type'] == 1)
             Разовая
         @else
             Повторяемая
-        @endif</div>
-        <div class="td">
-
+        @endif
         </div>
+        <div class="td">{{$task['dat']}}</div>
         <div class="td">
-            <button class="button del_task" data-id="{{$task->id}}">
+            <button title="Изменить" class="button save_task" data-id="{{$task['id']}}">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+            </button>
+            <button title="Удалить" class="button del_task" data-id="{{$task['id']}}">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </div>

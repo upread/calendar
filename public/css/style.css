@@ -13,6 +13,7 @@ a{
 .wrapper{
     margin: 10px auto;
     max-width: 1500px;
+    padding: 10px;
 }
 #header{
     display: flex;

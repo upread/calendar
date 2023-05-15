@@ -57,5 +57,6 @@ class BetController extends Controller
             ->delete();
             return json_encode($resp);
         }
+
     }
 }
