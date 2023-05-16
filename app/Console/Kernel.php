@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
             $today = date("N");
             $tim = date("H:i", strtotime('+3 hours')).":00";
 
-            echo "---".$tim."----";
+          
 
             $tasks_repeat = DB::table('tasks')
             ->where('type', '2')
@@ -54,17 +54,25 @@ class Kernel extends ConsoleKernel
             ->where('time_send', $tim)
             ->get();
 
-
             $tasks = $tasks_one->merge($tasks_repeat);
 
-            $tg = new Telegram();
-            foreach ($tasks as $task){
-                $tg->sendMessage("506570374", $task->name);
-                DB::table('tasks')
-                ->where('id', $task->id)
-                ->update([
-                    'is_send' => '1'
-                ]);
+            if ($tasks){  
+                $tg = new Telegram();
+                foreach ($tasks as $task){  
+                    $user = DB::table('users')->where('id', $task->user_id)->first();
+                    if ($user){                                        
+                        $tg_id = $user->tg;
+                        if ($tg_id){
+                            $tg->sendMessage($tg_id, $task->name);
+                            DB::table('tasks')
+                            ->where('id', $task->id)
+                            ->update([
+                                'is_send' => '1'
+                            ]);
+                        }
+                    }
+                }
+
             }
         })->everyMinute();
     }

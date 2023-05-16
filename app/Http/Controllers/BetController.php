@@ -58,5 +58,22 @@ class BetController extends Controller
             return json_encode($resp);
         }
 
+        if ($request->reque == "save_user_data"){
+            $resp["success"] = true;
+            $resp["mess"] = "Сохранено успешно";
+
+            $arrUp = array();
+
+            foreach ($request->data as $field => $val){
+                $arrUp[$field] = $val;
+            }
+
+            DB::table('users')
+            ->where('id', $uid)
+            ->update($arrUp);
+
+            return json_encode($resp);
+        }
+
     }
 }

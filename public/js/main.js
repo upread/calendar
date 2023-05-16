@@ -185,6 +185,30 @@ $(function() {
         }
     });
 
+    $( "#save_profile" ).click(function() {
+      let data = {};
+
+      $(".user_data").each(function(idx, item) {
+        data[$(item).data("name")] = $(item).val();
+      });
+
+
+      $.post("/ajax", {
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+        "reque": "save_user_data",
+        "data": data
+      }).done(function(data) {
+        var obj = JSON.parse(data);
+        if (obj["success"]){
+          Swal.fire(
+            'Успешно',
+            obj["mess"],
+            'success'
+        );
+        }
+      });
+    });
+
     setTimeout(() => {
         $("#preloader").css('display', 'none');
     }, 10000);

@@ -12,35 +12,6 @@ use App\Telegram\Telegram;
 
 class DashboardController extends Controller
 {
-    function getNameDay($day){
-        $name = "";
-        $days = array("0", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье");
-        $num_day = (int)$day;
-        if ($num_day < 8){
-            $name = $days[$num_day];
-        }
-
-        return $name;
-    }
-
-    function dateToStr($date){
-        $str = date("H:i d.m.Y", strtotime($date));  
-        return $str;
-        /*
-        $parts1 = explode(" ", $date);
-
-        if (count($parts1) == 2){
-            $parts2 = explode("-", $parts1[0]);
-            $parts3 = explode(":", $parts1[1]);
-
-            if (count($parts2) == 3 && count($parts2) == 3){
-                $str = $parts3[0].":".$parts3[1]." ".$parts2[2].".".$parts2[1].".".$parts2[0];
-            }
-        }
-        */
-    }
-    
-
     function getUserTasks($user_id){
         return DB::table('tasks')
         ->where('user_id', $user_id)
