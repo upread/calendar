@@ -6,62 +6,64 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="">
         <base href="{{env('APP_URL')}}" />
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Умный сервис напоминаний</title>
         @include('components.head')
     </head>
     <body>
         <div id="preloader">
             <div class="lds-hourglass"></div>
         </div>
-        <header>
-            <div id="menu_head_index">
-                @auth
-                <div class="menu_head_index_item">
-                    <a href="dashboard">Задачи</a>
+        <div id="wrap_index">
+            <div id="slogan">Умный сервис напоминаний</div>
+            <div id="main_index">
+                <div id="menu_head_index">
+                    @auth
+                    <div class="menu_head_index_item">
+                        <a href="dashboard">Задачи</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="profile">Профиль</a>
+                    </div>
+                    @endauth
+                    @guest
+                    <div class="menu_head_index_item">
+                        <a href="login">Вход</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="registration">Регистрация</a>
+                    </div>
+                    @endguest
                 </div>
-                @endauth
-                @guest
-                <div class="menu_head_index_item">
-                    <a href="login">Вход</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="registration">Регистрация</a>
-                </div>
-                @endguest
-                <div class="menu_head_index_item">
-                    О сайте
+                <div class="wrap_logo_idex">
+                    <img src="img/logo.png" />
                 </div>
             </div>
-        </header>
-        <div class="">
+            <footer>
+                <div id="menu_foot_index">
+                    <div class="menu_head_index_item">
+                        <a href="#">Правила</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">Поддержка</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">Политика конфиденциальности</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">Пользовательское соглашение</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">FAQ</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">Правила</a>
+                    </div>
+                    <div class="menu_head_index_item">
+                        <a href="#">О проекте</a>
+                    </div>
+                </div>
+            </footer>
         </div>
-
-
-        <footer>
-            <div id="menu_foot_index">
-                <div class="menu_head_index_item">
-                    <a href="#">Правила</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">Поддержка</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">Политика конфиденциальности</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">Пользовательское соглашение</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">FAQ</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">Правила</a>
-                </div>
-                <div class="menu_head_index_item">
-                    <a href="#">О проекте</a>
-                </div>
-            </div>
-        </footer>
     </body>
 </html>
 </html>
