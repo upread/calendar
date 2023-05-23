@@ -200,11 +200,18 @@ $(function() {
       }).done(function(data) {
         var obj = JSON.parse(data);
         if (obj["success"]){
-          Swal.fire(
-            'Успешно',
-            obj["mess"],
-            'success'
-        );
+            Swal.fire(
+                'Успешно',
+                obj["mess"],
+                'success'
+            );
+        }
+        else{
+            Swal.fire(
+                'Ошибка',
+                obj["err"],
+                'error'
+            );
         }
       });
     });

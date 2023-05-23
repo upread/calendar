@@ -59,18 +59,24 @@ class BetController extends Controller
         }
 
         if ($request->reque == "save_user_data"){
-            $resp["success"] = true;
-            $resp["mess"] = "Сохранено успешно";
-
             $arrUp = array();
-
             foreach ($request->data as $field => $val){
                 $arrUp[$field] = $val;
             }
 
-            DB::table('users')
-            ->where('id', $uid)
-            ->update($arrUp);
+            try{
+                DB::table('users')
+                ->where('id', $uid)
+                ->update($arrUp);
+
+                $resp["success"] = true;
+                $resp["mess"] = "Сохранено успешно";
+            } catch (\Exception $e) {
+                $resp["success"] = false;
+                $resp["err"] = "Ошибка, обратитесь к системному администратору.";
+            }
+
+
 
             return json_encode($resp);
         }
