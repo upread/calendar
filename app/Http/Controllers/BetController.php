@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Telegram\Telegram;
 
 class BetController extends Controller
 {
@@ -75,9 +75,28 @@ class BetController extends Controller
                 $resp["success"] = false;
                 $resp["err"] = "Ошибка, обратитесь к системному администратору.";
             }
+            return json_encode($resp);
+        }
+
+        if ($request->reque == "send_tg_code"){
+            //проверяем, когда последний раз отправляли код для данного пользователя
 
 
+            //генерируем случайный код
 
+            //записываем его в базу
+
+            //логируем действие
+
+            //отправляем в телеграм
+            $tg_id = $request->tg_id;
+            $tg = new Telegram();
+            $tg->sendMessage($tg_id, "эээ, привет");
+
+            //отправляем ответ
+
+
+            $resp["success"] = true;
             return json_encode($resp);
         }
 

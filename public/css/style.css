@@ -154,4 +154,23 @@ footer{
     text-align: center;
     font-size: 2em;
 }
-
+.wrap_flex{
+    display: flex;
+    padding: 10px;
+    border: 1px solid #00cd00;
+    margin: 10px;
+    justify-content: start;
+    align-items: center;
+    border-radius: 5px;
+    width: max-content;
+}
+.part_in_flex{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    justify-content: center;
+    align-items: start;
+}
+.inp{
+    margin: 10px
+}

@@ -216,6 +216,72 @@ $(function() {
       });
     });
 
+    $( "#save_tg" ).click(function() {
+        //отправляем код, получаем ответ
+        let tg_id = $("#tg_id").val();
+
+        $.post("/ajax", {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "reque": "send_tg_code",
+            "tg_id": tg_id
+          }).done(function(data) {
+
+        Swal.fire({
+            title: "Привязка телеграма",
+            html: '<div>Вам в telegram отправлен код подтверждения, введите его. Если код не приходит, то убедитесь, что вы запустили бота.'
+            + '</div>',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Подтвердить',
+            cancelButtonText: 'Отмена',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return fetch(`/ajax`, {
+                    method: 'post',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
+                      },
+                    body: JSON.stringify({
+                        'reque': 'check_tg_code',
+                        'code':  $('#task_name').val()
+                    }),
+                })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error(response.statusText)
+                    }
+                    return response.json();
+                  })
+                  .then(data=>{
+                    if (!data["success"]){
+                        throw new Error("Ошибка")
+                    }
+                  })
+                  .catch(error => {
+                    Swal.showValidationMessage(
+                      `Request failed: ${error}`
+                    )
+                  })
+              },
+              allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+               if (result.isConfirmed) {
+                        Swal.fire(
+                            'Успешно',
+                            'Telegram успешно подтвержден',
+                            'success'
+                        );
+
+                    }
+
+                });
+            });
+    });
+
     setTimeout(() => {
         $("#preloader").css('display', 'none');
     }, 10000);
