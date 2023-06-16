@@ -120,6 +120,7 @@ class BetController extends Controller
         }
 
         if ($request->reque == "check_tg_code"){
+            //log migration
             $resp["success"] = true;
             return json_encode($resp);
         }
