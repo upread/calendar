@@ -225,10 +225,13 @@ $(function() {
             "reque": "send_tg_code",
             "tg_id": tg_id
           }).done(function(data) {
+            var obj = JSON.parse(data);
+            if (obj["success"]){
 
         Swal.fire({
             title: "Привязка телеграма",
-            html: '<div>Вам в telegram отправлен код подтверждения, введите его. Если код не приходит, то убедитесь, что вы запустили бота.'
+            html: '<div><input type="number" id="code_tg"/>'
+            +'Вам в telegram отправлен код подтверждения, введите его. Если код не приходит, то убедитесь, что вы запустили бота.'
             + '</div>',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -247,7 +250,7 @@ $(function() {
                       },
                     body: JSON.stringify({
                         'reque': 'check_tg_code',
-                        'code':  $('#task_name').val()
+                        'code':  $('#code_tg').val()
                     }),
                 })
                   .then(response => {
@@ -278,8 +281,16 @@ $(function() {
 
                     }
 
-                });
-            });
+                });        
+          }
+          else{
+            Swal.fire(
+              'Ошибка',
+              obj["err"],
+              'error'
+          );
+          }
+        });
     });
 
     setTimeout(() => {

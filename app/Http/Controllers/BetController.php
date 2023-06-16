@@ -81,21 +81,45 @@ class BetController extends Controller
         if ($request->reque == "send_tg_code"){
             //проверяем, когда последний раз отправляли код для данного пользователя
 
+            $log = DB::table('logs')
+            ->where('uid', $uid)
+            ->where('event', 1)
+            ->where('dat', '>', DB::raw("CURRENT_TIMESTAMP - interval '1' HOUR"))
+            ->first();
+            if ($log){
+                $resp["success"] = false;
+                $resp["err"] = "Отправлять код можно не чаще одного раза в час!";
+                return json_encode($resp);
+            }
 
             //генерируем случайный код
-
-            //записываем его в базу
+            $kode = rand(1, 99999);
 
             //логируем действие
+            $inf = [
+                'kode' => $kode
+            ];
+            $inf_txt = json_encode($inf);
+            DB::table('logs')
+            ->insert(
+                [
+                    'uid' => $uid,
+                    'event' => 1,
+                    'inf' => $inf_txt
+                ]
+            );
 
             //отправляем в телеграм
             $tg_id = $request->tg_id;
             $tg = new Telegram();
-            $tg->sendMessage($tg_id, "эээ, привет");
+            $tg->sendMessage($tg_id, "$kode - ваш код для привязки telegram. Код действителен 1 час.");
 
             //отправляем ответ
+            $resp["success"] = true;
+            return json_encode($resp);
+        }
 
-
+        if ($request->reque == "check_tg_code"){
             $resp["success"] = true;
             return json_encode($resp);
         }
