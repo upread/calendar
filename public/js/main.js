@@ -230,7 +230,7 @@ $(function() {
 
         Swal.fire({
             title: "Привязка телеграма",
-            html: '<div><input type="number" id="code_tg"/>'
+            html: '<div><input type="number" id="code_tg"/><br>'
             +'Вам в telegram отправлен код подтверждения, введите его. Если код не приходит, то убедитесь, что вы запустили бота.'
             + '</div>',
             showCancelButton: true,
@@ -261,12 +261,12 @@ $(function() {
                   })
                   .then(data=>{
                     if (!data["success"]){
-                        throw new Error("Ошибка")
+                        throw new Error(data["err"]);
                     }
                   })
                   .catch(error => {
                     Swal.showValidationMessage(
-                      `Request failed: ${error}`
+                      `${error}`
                     )
                   })
               },

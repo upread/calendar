@@ -79,49 +79,104 @@ class BetController extends Controller
         }
 
         if ($request->reque == "send_tg_code"){
-            //проверяем, когда последний раз отправляли код для данного пользователя
+            //проверяем, не привязан ли tg к другому пользователю
 
+            //проверяем, когда последний раз отправляли код для данного пользователя
             $log = DB::table('logs')
             ->where('uid', $uid)
             ->where('event', 1)
             ->where('dat', '>', DB::raw("CURRENT_TIMESTAMP - interval '1' HOUR"))
             ->first();
-            if ($log){
-                $resp["success"] = false;
-                $resp["err"] = "Отправлять код можно не чаще одного раза в час!";
-                return json_encode($resp);
+            
+            //если прошле час, то отправляем снова
+            if (!$log){
+                //генерируем случайный код
+                $kode = rand(1, 99999);
+
+                //логируем действие
+                $inf = [
+                    'kode' => $kode
+                ];
+                $inf_txt = json_encode($inf);
+                DB::table('logs')
+                ->insert(
+                    [
+                        'uid' => $uid,
+                        'event' => 1,
+                        'inf' => $inf_txt
+                    ]
+                );
+
+                //отправляем в телеграм
+                $tg_id = $request->tg_id;
+                $tg = new Telegram();
+
+                //todo обработка ошибки - нет такого тг
+                $tg->sendMessage($tg_id, "$kode - ваш код для привязки telegram. Код действителен 1 час.");
             }
-
-            //генерируем случайный код
-            $kode = rand(1, 99999);
-
-            //логируем действие
-            $inf = [
-                'kode' => $kode
-            ];
-            $inf_txt = json_encode($inf);
-            DB::table('logs')
-            ->insert(
-                [
-                    'uid' => $uid,
-                    'event' => 1,
-                    'inf' => $inf_txt
-                ]
-            );
-
-            //отправляем в телеграм
-            $tg_id = $request->tg_id;
-            $tg = new Telegram();
-            $tg->sendMessage($tg_id, "$kode - ваш код для привязки telegram. Код действителен 1 час.");
-
+            
             //отправляем ответ
             $resp["success"] = true;
             return json_encode($resp);
         }
 
         if ($request->reque == "check_tg_code"){
+            $kode_user = (int)$request->code;
             //log migration
+
+            //проверяем, когда последний раз отправляли код для данного пользователя
+            $log = DB::table('logs')
+            ->where('uid', $uid)
+            ->where('event', 1)
+            ->where('dat', '>', DB::raw("CURRENT_TIMESTAMP - interval '1' HOUR"))
+            ->first();
+
+            if (!$log){
+                $resp["success"] = false;
+                $resp["err"] = "Код не был отправлен или срок действия его вышел.";
+                return json_encode($resp);
+            }
+
+            //логирование
+            $inf = [
+                'kode' => $kode_user
+            ];
+            $inf_txt = json_encode($inf);
+            DB::table('logs')
+            ->insert(
+                [
+                    'uid' => $uid,
+                    'event' => 2,
+                    'inf' => $inf_txt
+                ]
+            );
+
+            //число проверок кода для данного пользователя
+            $checks = DB::table('logs')
+            ->where('uid', $uid)
+            ->where('event', 2)
+            ->where('dat', '>', DB::raw("CURRENT_TIMESTAMP - interval '1' HOUR"))
+            ->count();
+
+            if ($checks > 3){
+                $resp["success"] = false;
+                $resp["err"] = "Превышено число попыток. Пожалуйста, подождите, и попробуйте отправить код позже.";
+                return json_encode($resp);
+            }
+
+            //совпадение кодов
+            $kode_true = json_decode($log->inf, true)['kode'];
+            if ($kode_true != $kode_user){
+                $resp["success"] = false;
+                $resp["err"] = "Код не совпадает.";
+                return json_encode($resp);
+            }
+
+            
+
+
             $resp["success"] = true;
+
             return json_encode($resp);
         }
 
