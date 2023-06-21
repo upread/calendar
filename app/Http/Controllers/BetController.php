@@ -79,7 +79,8 @@ class BetController extends Controller
         }
 
         if ($request->reque == "send_tg_code"){
-            //проверяем, не привязан ли tg к другому пользователю
+            $tg_id = $request->tg_id;
+            //todo проверяем, не привязан ли tg к другому пользователю
 
             //проверяем, когда последний раз отправляли код для данного пользователя
             $log = DB::table('logs')
@@ -88,14 +89,15 @@ class BetController extends Controller
             ->where('dat', '>', DB::raw("CURRENT_TIMESTAMP - interval '1' HOUR"))
             ->first();
             
-            //если прошле час, то отправляем снова
+            //если прошел час, то отправляем снова
             if (!$log){
                 //генерируем случайный код
                 $kode = rand(1, 99999);
 
                 //логируем действие
                 $inf = [
-                    'kode' => $kode
+                    'kode' => $kode,
+                    'tg' => $tg_id
                 ];
                 $inf_txt = json_encode($inf);
                 DB::table('logs')
@@ -122,7 +124,6 @@ class BetController extends Controller
 
         if ($request->reque == "check_tg_code"){
             $kode_user = (int)$request->code;
-            //log migration
 
             //проверяем, когда последний раз отправляли код для данного пользователя
             $log = DB::table('logs')
@@ -172,11 +173,17 @@ class BetController extends Controller
                 return json_encode($resp);
             }
 
-            
-
+            //обновляем тг ид
+            $tg = json_decode($log->inf, true)['tg'];
+            DB::table('users')
+            ->where('id', $uid)
+            ->update(
+                [
+                    'tg' => $tg
+                ]
+            );
 
             $resp["success"] = true;
-
             return json_encode($resp);
         }
 

@@ -7,10 +7,10 @@
         <meta name="description" content="">
         <base href="{{env('APP_URL')}}" />
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <div class="">jjj
+        <div class="">
             {{ $slot }}
         </div>
     </body>

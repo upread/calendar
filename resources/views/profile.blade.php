@@ -15,6 +15,7 @@
 
 <div class="wrap_flex">
     <div class="part_in_flex">
+        <div>Наш бот: <a href="https://t.me/termRemindBot">@termRemindBot</a></div>
         <label>Telegram Id</label>
         <input type="number" class="inp" id="tg_id" value="{{$info->tg}}" />
         <button id="save_tg" class="unic_button unic_blue_button">Подтвердить Telegram Id</button>

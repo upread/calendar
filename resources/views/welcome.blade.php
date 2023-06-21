@@ -30,7 +30,7 @@
                         <a href="login">Вход</a>
                     </div>
                     <div class="menu_head_index_item">
-                        <a href="registration">Регистрация</a>
+                        <a href="register">Регистрация</a>
                     </div>
                     @endguest
                 </div>
