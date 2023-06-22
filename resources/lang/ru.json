@@ -5,5 +5,9 @@
     "Password": "Пароль",
     "Confirm Password": "Подтверждение пароля",
     "Already registered?": "Уже зарегистрированы?",
-    "Register": "Регистрация"
+    "Register": "Регистрация",
+    "Remember me": "Запомнить меня",
+    "Forgot your password?": "Забыли пароль?",
+    "Log in": "Вход",
+    "Just three steps": "Всего три шага"
 }

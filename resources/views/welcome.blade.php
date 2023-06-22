@@ -38,31 +38,16 @@
                     <img src="img/logo.png" />
                 </div>
             </div>
-            <footer>
-                <div id="menu_foot_index">
-                    <div class="menu_head_index_item">
-                        <a href="#">Правила</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">Поддержка</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">Политика конфиденциальности</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">Пользовательское соглашение</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">FAQ</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">Правила</a>
-                    </div>
-                    <div class="menu_head_index_item">
-                        <a href="#">О проекте</a>
-                    </div>
-                </div>
-            </footer>
+            <div id="desc_service">
+            {{ __('Just three steps') }}:
+                <ol>
+                    <li><a href="register">Зарегистрируйтесь</a> или <a href="login">войдите</a></li>
+                    <li>Запустите телеграм бот <a href="https://t.me/termRemindBot">@termRemindBot</a></li>
+                    <li>Подтвердите телеграм в профиле</li>
+                </ol>
+                И все! Можно создавать задачи, в ваш телеграм будут приходить оповещения о них.
+            </div>
+            @include('components.footer')
         </div>
     </body>
 </html>

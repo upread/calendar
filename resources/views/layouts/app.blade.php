@@ -10,11 +10,13 @@
         @include('components.head')
     </head>
     <body>
-        <div class="wrapper">
+        <div class="wrapper" style="display: flex;flex-direction: column; min-height: calc(100vh - 40px);">
             @include('components.header')
             <main>
                 {{ $slot }}
             </main>
+            @include('components.footer')
         </div>
+        
     </body>
 </html>

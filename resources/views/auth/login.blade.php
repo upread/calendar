@@ -8,11 +8,11 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="/login">
+        <form method="POST" action="/login" class="auth_form">
             @csrf
 
             <!-- Email Address -->
-            <div>
+            <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
@@ -43,9 +43,9 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <button type="submit" class="unic_button unic_blue_button">
                     {{ __('Log in') }}
-                </x-button>
+                </button>
             </div>
         </form>
     </x-auth-card>

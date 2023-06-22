@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\BanlanceController;
+
+//URL::forceScheme('https');
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +27,7 @@ Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->middlew
 Route::post('/ajax', [BetController::class, 'showAjax'])->middleware(['auth']);
 Route::get('/profile', [ProfileController::class, 'showProfile'])->middleware(['auth'])->name('profile');
 
+
 require __DIR__.'/auth.php';
+
+Route::get('/{pageNotFound1}', [BanlanceController::class, 'show']);
