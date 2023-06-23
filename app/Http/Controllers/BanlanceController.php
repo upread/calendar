@@ -18,8 +18,9 @@ class BanlanceController extends Controller
             ->first();   
             
             if ($html){
-                echo $html->name;
-                return true;
+                $name = $html->name;
+                $txt = $html->txt;
+                return view('html', ["name" => $name, "txt" => $txt]);
             }
         }
         abort(404);

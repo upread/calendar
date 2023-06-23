@@ -7,16 +7,16 @@
             <a href="/support">Поддержка</a>
         </div>
         <div class="menu_head_index_item">
-            <a href="#">Политика конфиденциальности</a>
+            <a href="/privacy-policy">Политика конфиденциальности</a>
         </div>
         <div class="menu_head_index_item">
-            <a href="#">Пользовательское соглашение</a>
+            <a href="/terms-of-use">Пользовательское соглашение</a>
         </div>
         <div class="menu_head_index_item">
-            <a href="#">FAQ</a>
+            <a href="/faq">FAQ (вопросы и ответы)</a>
         </div>
         <div class="menu_head_index_item">
-            <a href="#">О проекте</a>
+            <a href="/about">О проекте</a>
         </div>
     </div>
 </footer>
