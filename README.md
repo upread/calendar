@@ -23,4 +23,7 @@ TODO
     <li><input type="checkbox">Управление задачами через телеграм</li>
     <li><input type="checkbox">Валидация HTML</li>
     <li><input type="checkbox">Возможность изменения задач</li>
+    <li><input type="checkbox">Таймер</li>
+    <li><input type="checkbox">Повторяемые - несколько дней недели</li>
+    <li><input type="checkbox">Дубль задачи</li>
 </ul>

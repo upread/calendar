@@ -24,7 +24,7 @@
         </div>
         <div class="td">{{$task['dat']}}</div>
         <div class="td">
-            <button title="Изменить" class="button save_task" data-id="{{$task['id']}}">
+            <button title="Изменить" class="button save_task" data-id="{{$task['id']}}" data-name="{{$task['name']}}" data-type="{{$task['type']}}">
                 <i class="fa fa-edit" aria-hidden="true"></i>
             </button>
             <button title="Удалить" class="button del_task" data-id="{{$task['id']}}">
