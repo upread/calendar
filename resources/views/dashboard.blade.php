@@ -22,9 +22,19 @@
             Повторяемая
         @endif
         </div>
-        <div class="td">{{$task['dat']}}</div>
         <div class="td">
-            <button title="Изменить" class="button save_task" data-id="{{$task['id']}}" data-name="{{$task['name']}}" data-type="{{$task['type']}}">
+        @if ($task['type'] == 1)
+            {{$task['date_send']}}
+        @else
+            {{$task['days_send_name']}}, {{$task['time_send']}}
+        @endif
+            
+        </div>
+        <div class="td">
+            <button title="Изменить" class="button save_task" data-id="{{$task['id']}}" 
+            data-name="{{$task['name']}}" 
+            data-type="{{$task['type']}}" data-date_send="{{$task['date_send']}}" 
+            data-time_send="{{$task['time_send']}}" data-days_send="{{$task['days_send']}}"> 
                 <i class="fa fa-edit" aria-hidden="true"></i>
             </button>
             <button title="Удалить" class="button del_task" data-id="{{$task['id']}}">

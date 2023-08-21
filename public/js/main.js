@@ -1,5 +1,19 @@
 $(function() {
 
+  function conv_date_to_local(source_date){
+    let arr = source_date.split(" ");
+    let arr1 = arr[0].split(":");
+    let arr2 = arr[1].split(".");
+    let local_date = arr2[2]+"-"+arr2[1]+"-"+arr2[0]+"T"+arr1[0]+":"+arr1[1];
+    return local_date;
+  }
+
+  function conv_date_to_time(source_date){
+    let arr = source_date.split(":");
+    let local_time = arr[0]+":"+arr[1];
+    return local_time;
+  }
+
     function add_task(task_id, task_name, task_type){
         let div = `<div class="wrap_task" id="wrap_task${task_id}">`;
         div += `<div class="task_name td">${task_name}</div>`;
@@ -200,6 +214,15 @@ $(function() {
 
       let type = $(this).data("type");
       $("#task_type").val(type).change();
+
+      if (type == 1){      
+        $("#task_date_send").val(conv_date_to_local($(this).data("date_send")));
+      }
+      if (type == 2){
+        $("#task_days_send").val($(this).data("days_send"));
+        $("#task_time_send").val(conv_date_to_time($(this).data("time_send")));
+      }
+
      // alert(type);
   });
 

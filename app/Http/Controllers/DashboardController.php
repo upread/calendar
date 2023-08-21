@@ -27,18 +27,19 @@ class DashboardController extends Controller
         $tasks_raw = $this->getUserTasks($user_id);
 
         foreach ($tasks_raw as $task){
-            if ($task->type == 1){
-                $dat = $this->dateToStr($task->date_send);
-            }
-            else{
-                $dat = $this->getNameDay($task->days_send);
-            }
+            $dat = $this->dateToStr($task->date_send);
+            $tim = $task->time_send;
+            $days_send = $task->days_send;
+            $days_send_name = $this->getNameDay($task->days_send);
          
             $tasks[] = [
                 'id' => $task->id,
                 'name' => $task->name,
                 'type' => $task->type,
-                'dat' => $dat
+                'date_send' => $dat,
+                'time_send' => $tim,
+                'days_send' => $days_send,
+                'days_send_name' => $days_send_name,
             ];
         }
 
